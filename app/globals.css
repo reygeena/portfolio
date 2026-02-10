@@ -43,6 +43,10 @@
     --sidebar-accent-foreground: 210 40% 92%;
     --sidebar-border: 222 20% 18%;
     --sidebar-ring: 172 66% 50%;
+    /* enhanced palette */
+    --glow: 172 66% 50%;
+    --gold: 45 93% 58%;
+    --gold-foreground: 45 93% 20%;
   }
 }
 
@@ -55,10 +59,33 @@
   }
 }
 
+/* ─── Smooth Scroll ─── */
 html {
   scroll-behavior: smooth;
 }
 
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(222 47% 6%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(172 66% 50% / 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(172 66% 50% / 0.5);
+}
+
+/* ─── Dot Grid Background ─── */
+.dot-grid {
+  background-image: radial-gradient(circle, hsl(172 66% 50% / 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Float Animations ─── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
@@ -75,4 +102,184 @@ html {
 
 .animate-float-delayed {
   animation: float-delayed 8s ease-in-out infinite;
+}
+
+/* ─── Shimmer / Sweep ─── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Gradient Text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(172 66% 50%), hsl(190 80% 60%), hsl(172 66% 50%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, hsl(45 93% 58%), hsl(35 100% 70%), hsl(45 93% 58%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ─── Glow Effects ─── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px hsl(172 66% 50% / 0.2), 0 0 20px hsl(172 66% 50% / 0.1); }
+  50% { box-shadow: 0 0 10px hsl(172 66% 50% / 0.4), 0 0 40px hsl(172 66% 50% / 0.15); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-gold {
+  0%, 100% { box-shadow: 0 0 8px hsl(45 93% 58% / 0.2), 0 0 30px hsl(45 93% 58% / 0.1); }
+  50% { box-shadow: 0 0 15px hsl(45 93% 58% / 0.5), 0 0 50px hsl(45 93% 58% / 0.2); }
+}
+
+.animate-glow-pulse-gold {
+  animation: glow-pulse-gold 3s ease-in-out infinite;
+}
+
+/* ─── Gradient Border ─── */
+.gradient-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(172 66% 50% / 0.5), transparent 40%, transparent 60%, hsl(172 66% 50% / 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: hsl(222 40% 10% / 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsl(222 20% 18% / 0.5);
+}
+
+.glass-card {
+  background: hsl(222 40% 10% / 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(222 20% 18% / 0.4);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: hsl(222 40% 10% / 0.6);
+  border-color: hsl(172 66% 50% / 0.25);
+  box-shadow: 0 8px 32px hsl(172 66% 50% / 0.08), 0 0 0 1px hsl(172 66% 50% / 0.05);
+  transform: translateY(-2px);
+}
+
+/* ─── Typing Cursor ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: hsl(172 66% 50%);
+  margin-left: 4px;
+  animation: blink 0.8s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* ─── Pulse Ring (timeline dots) ─── */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid hsl(172 66% 50% / 0.6);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ─── Progress Bar Fill ─── */
+@keyframes fill-bar {
+  from { width: 0%; }
+}
+
+/* ─── Sparkle / Star ─── */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* ─── Draw Line (SVG timeline) ─── */
+@keyframes draw-line {
+  from { stroke-dashoffset: 100%; }
+  to { stroke-dashoffset: 0%; }
+}
+
+/* ─── Ripple Effect ─── */
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* ─── Gradient Rotate (border) ─── */
+@keyframes gradient-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ─── Wave Separator ─── */
+.wave-separator {
+  position: relative;
+}
+
+.wave-separator::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg, hsl(222 47% 6%) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ─── Focus Glow for Inputs ─── */
+.input-glow:focus {
+  box-shadow: 0 0 0 3px hsl(172 66% 50% / 0.15), 0 0 20px hsl(172 66% 50% / 0.08);
+  border-color: hsl(172 66% 50% / 0.5);
+}
+
+/* ─── Selection Color ─── */
+::selection {
+  background: hsl(172 66% 50% / 0.3);
+  color: hsl(210 40% 92%);
 }
